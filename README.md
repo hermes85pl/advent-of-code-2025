@@ -20,6 +20,8 @@ This repository contains solutions to the [Advent of Code 2025](https://adventof
 
 ## What was out of scope
 
+- Strictly validating the input as a whole for each puzzle.
+
 - Providing the most performant or optimized solution.
 
 - Making the code more readable or maintainable.
