@@ -5,9 +5,8 @@ value = VALUE_INIT
 total = 0
 
 for delta in deltas():
-    total += (
-        abs(delta) + ((VALUE_SPAN - value) % VALUE_SPAN if delta < 0 else value)
-    ) // VALUE_SPAN
+    extra = value if delta >= 0 else ((VALUE_SPAN - value) % VALUE_SPAN)
+    total += (abs(delta) + extra) // VALUE_SPAN
     value = (value + delta) % VALUE_SPAN
 
 assert total == 5961
