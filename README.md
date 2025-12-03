@@ -8,7 +8,7 @@ This repository contains solutions to the [Advent of Code 2025](https://adventof
 
 - Sticking solely to Python with no external dependencies.
 
-- Not reuising any code between any of the daily puzzles.
+- Not reusing any code between any of the daily puzzles.
 
 - Sticking to synchronous execution on a single thread.
 
