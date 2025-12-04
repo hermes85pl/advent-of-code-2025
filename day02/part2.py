@@ -1,4 +1,4 @@
-from common import values
+from common import input_values
 
 
 def check(value: int) -> bool:
@@ -10,6 +10,6 @@ def check(value: int) -> bool:
     return False
 
 
-total = sum(i for i in values() if check(i))
+total = sum(i for i in input_values() if check(i))
 
 assert total == 26202168557

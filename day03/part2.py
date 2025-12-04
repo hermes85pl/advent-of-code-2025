@@ -1,4 +1,4 @@
-from common import banks, joltage
+from common import input_banks, joltage
 
 
 def best_cells(bank: list[int], size: int) -> list[int]:
@@ -16,6 +16,6 @@ def best_cells(bank: list[int], size: int) -> list[int]:
     return cells
 
 
-total = sum(joltage(best_cells(bank, 12)) for bank in banks())
+total = sum(joltage(best_cells(bank, 12)) for bank in input_banks())
 
 assert total == 169019504359949

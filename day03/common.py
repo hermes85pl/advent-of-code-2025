@@ -3,7 +3,7 @@ from functools import reduce
 from typing import Iterable
 
 
-def banks():
+def input_banks():
     for line in sys.stdin:
         yield [int(x) for x in line.rstrip()]
 
