@@ -1,0 +1,35 @@
+.PHONY: all help _run FORCE
+
+DAYS ?= day*
+
+all:
+	@DAYS="day*" $(MAKE) --no-print-directory _run
+
+day%: FORCE
+	@DAYS="$@" $(MAKE) --no-print-directory _run
+
+help:
+	@echo "Usage: make [day01|day*|DAYS='day01 day02']"
+	@echo "  make                    # Run all days (default: day*)"
+	@echo "  make day01 day02        # Run specific days"
+	@echo "  make DAYS='day01 day02' # Run specific days"
+
+_run:
+	@for day in $$DAYS; do \
+		input_file="$$day/input.txt"; \
+		[ ! -f "$$input_file" ] && echo "Missing $$day input" && continue; \
+		for part in part1 part2; do \
+			script_file="$$day/$$part.py"; \
+			if [ -f "$$script_file" ]; then \
+				echo -n "Running $$day $$part... "; \
+				t=$$(bash -c "TIMEFORMAT='%R'; { time python -Bbb '$$script_file' <'$$input_file'; } 2>&1"); \
+				exit_code=$$?; \
+				echo "$${t}s"; \
+				[ $$exit_code -ne 0 ] && exit $$exit_code || true \
+			else \
+				echo "Missing $$day $$part"; \
+			fi; \
+		done; \
+	done
+
+FORCE:
