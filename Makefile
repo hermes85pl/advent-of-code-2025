@@ -8,11 +8,15 @@ all:
 day%: FORCE
 	@DAYS="$@" $(MAKE) --no-print-directory _run
 
+latest:
+	@DAYS=$$(ls -d day* 2>/dev/null | tail -1) $(MAKE) --no-print-directory _run
+
 help:
 	@echo "Usage: make [day01|day*|DAYS='day01 day02']"
 	@echo "  make                    # Run all days (default: day*)"
 	@echo "  make day01 day02        # Run specific days"
 	@echo "  make DAYS='day01 day02' # Run specific days"
+	@echo "  make latest             # Run the most recent day"
 
 _run:
 	@for day in $$DAYS; do \
