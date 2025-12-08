@@ -1,5 +1,5 @@
 import sys
-from heapq import heappop, heappush
+from heapq import heapify, heappop
 from itertools import combinations
 from typing import Iterable, NamedTuple
 
@@ -22,9 +22,8 @@ def input_positions():
 
 
 def sorted_by_distance(positions: Iterable[Position]):
-    distances: list[tuple[float, Position, Position]] = []
-    for a, b in combinations(positions, 2):
-        heappush(distances, (b - a, a, b))
+    distances = [(b - a, a, b) for a, b in combinations(positions, 2)]
+    heapify(distances)
     while distances:
         _, a, b = heappop(distances)
         yield a, b

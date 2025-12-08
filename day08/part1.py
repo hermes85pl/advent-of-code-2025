@@ -1,4 +1,5 @@
 from functools import reduce
+from heapq import nlargest
 from itertools import islice
 
 from common import input_positions, sorted_by_distance
@@ -19,6 +20,6 @@ for a, b in islice(closest_nodes, 1000):
 
 clusters = {frozenset(c) for c in node_to_cluster_map.values()}
 
-product = reduce(lambda a, b: a * b, (sorted(len(c) for c in clusters)[-3:]))
+product = reduce(lambda a, b: a * b, nlargest(3, (len(c) for c in clusters)))
 
 assert product == 164475
