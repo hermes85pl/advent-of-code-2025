@@ -5,4 +5,5 @@ SPLITTER = "^"
 
 
 def input_rows():
-    return (list(line.rstrip()) for line in sys.stdin)
+    for line in sys.stdin:
+        yield line.rstrip()
