@@ -21,7 +21,7 @@ def input_positions():
         yield Position(*(int(value) for value in line.rstrip().split(",")))
 
 
-def sorted_by_distance(positions: Iterable[Position]):
+def pairs_sorted_by_distance(positions: Iterable[Position]):
     distances = [(b - a, a, b) for a, b in combinations(positions, 2)]
     heapify(distances)
     while distances:

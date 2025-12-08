@@ -1,8 +1,8 @@
-from common import input_positions, sorted_by_distance
+from common import input_positions, pairs_sorted_by_distance
 
 nodes = list(input_positions())
 
-closest_nodes = sorted_by_distance(nodes)
+closest_nodes = pairs_sorted_by_distance(nodes)
 
 node_to_cluster_map = {n: {n} for n in nodes}
 
