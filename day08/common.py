@@ -16,6 +16,25 @@ class Position(NamedTuple):
         return (dx**2 + dy**2 + dz**2) ** 0.5
 
 
+class PositionClusterer:
+    _pos_to_cluster_map: dict[Position, set[Position]]
+
+    def __init__(self, positions: Iterable[Position]) -> None:
+        self._pos_to_cluster_map = {p: {p} for p in positions}
+
+    def join_if_disjoint(self, a: Position, b: Position) -> int:
+        cluster_a, cluster_b = self._pos_to_cluster_map[a], self._pos_to_cluster_map[b]
+        if cluster_a & cluster_b:
+            return 0
+        joint_cluster = cluster_a | cluster_b
+        for node in joint_cluster:
+            self._pos_to_cluster_map[node] = joint_cluster
+        return len(joint_cluster)
+
+    def clusters(self) -> set[frozenset[Position]]:
+        return {frozenset(c) for c in self._pos_to_cluster_map.values()}
+
+
 def input_positions():
     for line in sys.stdin:
         yield Position(*(int(value) for value in line.rstrip().split(",")))
