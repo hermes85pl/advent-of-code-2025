@@ -1,4 +1,4 @@
-.PHONY: all help _run FORCE
+.PHONY: all latest clean help _run FORCE
 
 DAYS ?= day*
 
@@ -11,12 +11,16 @@ day%: FORCE
 latest:
 	@DAYS=$$(ls -d day* 2>/dev/null | tail -1) $(MAKE) --no-print-directory _run
 
+clean:
+	@git clean -dfx
+
 help:
 	@echo "Usage: make [day01|day*|DAYS='day01 day02']"
 	@echo "  make                    # Run all days (default: day*)"
 	@echo "  make day01 day02        # Run specific days"
 	@echo "  make DAYS='day01 day02' # Run specific days"
 	@echo "  make latest             # Run the most recent day"
+	@echo "  make clean              # Remove untracked changes"
 
 _run:
 	@for day in $$DAYS; do \
