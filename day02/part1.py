@@ -3,11 +3,11 @@ from common import input_values
 
 def check(value: int) -> bool:
     s = str(value)
-    if len(s) % 2 != 0:
+    s_len = len(s)
+    if s_len % 2 != 0:
         return False
-    p = len(s) // 2
-    a, b = s[:p], s[p:]
-    return a == b
+    p = s_len // 2
+    return s[:p] == s[p:]
 
 
 total = sum(i for i in input_values() if check(i))
