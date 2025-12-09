@@ -17,6 +17,7 @@ clean:
 help:
 	@echo "Usage: make [day01|day*|DAYS='day01 day02']"
 	@echo "  make                    # Run all days (default: day*)"
+	@echo "  make day* -j12 -O       # Run many days at once (yolo)"
 	@echo "  make day01 day02        # Run specific days"
 	@echo "  make DAYS='day01 day02' # Run specific days"
 	@echo "  make latest             # Run the most recent day"
@@ -28,15 +29,12 @@ _run:
 		[ ! -f "$$input_file" ] && echo "Missing $$day input" && continue; \
 		for part in part1 part2; do \
 			script_file="$$day/$$part.py"; \
-			if [ -f "$$script_file" ]; then \
-				echo -n "Running $$day $$part... "; \
-				t=$$(bash -c "TIMEFORMAT='%R'; { time python -Bbb '$$script_file' <'$$input_file'; } 2>&1"); \
-				exit_code=$$?; \
-				echo "$${t}s"; \
-				[ $$exit_code -ne 0 ] && exit $$exit_code || true \
-			else \
-				echo "Missing $$day $$part"; \
-			fi; \
+			[ ! -f "$$script_file" ] && echo "Missing $$day $$part" && continue; \
+			echo -n "Running $$day $$part... "; \
+			t=$$(bash -c "TIMEFORMAT='%R'; { time python -Bbb '$$script_file' <'$$input_file'; } 2>&1"); \
+			exit_code=$$?; \
+			echo "$${t}s"; \
+			[ $$exit_code -eq 0 ] || exit $$exit_code; \
 		done; \
 	done
 
