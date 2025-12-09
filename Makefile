@@ -32,7 +32,7 @@ _run:
 			script_file="$$day/$$part.py"; \
 			[ ! -f "$$script_file" ] && echo "Missing $$day $$part" && continue; \
 			echo -n "Running $$day $$part... "; \
-			t=$$(bash -c "TIMEFORMAT='%R'; { time $(PYTHON) -Bbb '$$script_file' <'$$input_file'; } 2>&1"); \
+			t=$$(time -f %e $(PYTHON) -Bbb "$$script_file" <"$$input_file" 2>&1); \
 			exit_code=$$?; \
 			echo "$${t}s"; \
 			[ $$exit_code -eq 0 ] || exit $$exit_code; \
