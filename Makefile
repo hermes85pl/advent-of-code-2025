@@ -1,6 +1,6 @@
 .PHONY: all latest clean help _run FORCE
 
-PYTHON := $(or $(shell which pypy3), python3)
+PYTHON ?= $(or $(shell which pypy3), python3)
 DAYS ?= day*
 
 all:
