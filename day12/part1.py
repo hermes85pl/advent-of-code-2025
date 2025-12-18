@@ -17,6 +17,6 @@ def check_region(region_str: str) -> bool:
     )
 
 
-total = sum(check_region(region) for region in regions.split("\n") if region)
+total = sum(check_region(region) for region in regions.splitlines())
 
 assert total == 595
